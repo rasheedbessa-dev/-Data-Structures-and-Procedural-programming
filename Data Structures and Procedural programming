@@ -1,1 +1,96 @@
-je t'aime
+Problème 1 :
+ALGORITHM SommeElementsDistincts
+VAR
+    ensemble1 : ARRAY[4] OF INTEGER := [3, 1, 7, 9]
+    ensemble2 : ARRAY[5] OF INTEGER := [2, 4, 1, 9, 3]
+    somme : INTEGER := 0
+    i, j : INTEGER
+    present : BOOLEAN
+BEGIN
+    // Parcourir les éléments du premier ensemble
+    FOR i := 0 TO 3 DO
+        present := False
+        FOR j := 0 TO 4 DO
+            IF ensemble1[i] = ensemble2[j] THEN
+                present := True
+            END_IF
+        END_FOR
+        IF present = False THEN
+            somme := somme + ensemble1[i]
+        END_IF
+    END_FOR
+
+    // Parcourir les éléments du deuxième ensemble
+    FOR i := 0 TO 4 DO
+        present := False
+        FOR j := 0 TO 3 DO
+            IF ensemble2[i] = ensemble1[j] THEN
+                present := True
+            END_IF
+        END_FOR
+        IF present = False THEN
+            somme := somme + ensemble2[i]
+        END_IF
+    END_FOR
+
+    Write("Somme des éléments distincts = ", somme)
+END
+
+Problème 2 :
+
+PROCEDURE dot_product(v1 : ARRAY OF REAL, v2 : ARRAY OF REAL, n : INTEGER, Var ps : REAL)
+VAR
+    i : INTEGER
+BEGIN
+    ps := 0
+    FOR i := 0 TO n-1 DO
+        ps := ps + v1[i] * v2[i]
+    END_FOR
+END_PROCEDURE
+ALGORITHM OrthogonalVectors
+VAR
+    v1, v2 : ARRAY[3] OF REAL
+    ps : REAL
+BEGIN
+    // Exemple de vecteurs
+    v1 := [1, 2, -1]
+    v2 := [2, -1, 1]
+
+    // Appel de la procédure
+    dot_product(v1, v2, 3, ps)
+
+    IF ps = 0 THEN
+        Write("Les vecteurs sont orthogonaux")
+    ELSE
+        Write("Les vecteurs ne sont pas orthogonaux")
+    END_IF
+END
+
+FUNCTION dot_product(v1 : ARRAY OF REAL, v2 : ARRAY OF REAL, n : INTEGER) : REAL
+VAR
+    i : INTEGER
+    somme : REAL := 0
+BEGIN
+    FOR i := 0 TO n-1 DO
+        somme := somme + v1[i] * v2[i]
+    END_FOR
+    RETURN somme
+END_FUNCTION
+
+ALGORITHM OrthogonalVectorsAvecFonction
+VAR
+    v1, v2 : ARRAY[3] OF REAL
+    ps : REAL
+BEGIN
+    v1 := [1, 2, -1]
+    v2 := [2, -1, 1]
+
+    ps := dot_product(v1, v2, 3)
+
+    IF ps = 0 THEN
+        Write("Les vecteurs sont orthogonaux")
+    ELSE
+        Write("Les vecteurs ne sont pas orthogonaux")
+    END_IF
+END
+
